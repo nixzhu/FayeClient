@@ -106,7 +106,7 @@ extension FayeClient {
 
 extension FayeClient {
 
-    public func setExtension(_ _extension: [String: Any], forChannel channel: String) {
+    public func setExtension(_ _extension: [String: Any], for channel: String) {
 
         channelExtensions[channel] = _extension
     }
@@ -116,19 +116,19 @@ extension FayeClient {
         channelExtensions.removeValue(forKey: channel)
     }
 
-    public func sendMessage(_ message: [String: Any], toChannel channel: String) {
+    public func sendMessage(_ message: [String: Any], to channel: String) {
 
         let messageID = generateUniqueMessageID()
         sendBayeuxPublishMessage(message, withMessageUniqueID: messageID, toChannel: channel, usingExtension: nil)
     }
 
-    public func sendMessage(_ message: [String: Any], toChannel channel: String, usingExtension _extension: [String: Any]?) {
+    public func sendMessage(_ message: [String: Any], to channel: String, usingExtension _extension: [String: Any]?) {
 
         let messageID = generateUniqueMessageID()
         sendBayeuxPublishMessage(message, withMessageUniqueID: messageID, toChannel: channel, usingExtension: _extension)
     }
 
-    public func sendMessage(_ message: [String: Any], toChannel channel: String, usingExtension _extension: [String: Any]?, usingBlock subscriptionHandler: @escaping FayeClientPrivateHandler) {
+    public func sendMessage(_ message: [String: Any], to channel: String, usingExtension _extension: [String: Any]?, usingBlock subscriptionHandler: @escaping FayeClientPrivateHandler) {
 
         let messageID = generateUniqueMessageID()
 
@@ -137,7 +137,7 @@ extension FayeClient {
         sendBayeuxPublishMessage(message, withMessageUniqueID: messageID, toChannel: channel, usingExtension: _extension)
     }
 
-    public func connectToURL(_ serverURL: URL) -> Bool {
+    public func connect(to serverURL: URL) -> Bool {
 
         if isConnected || isWebSocketOpen {
             return false
@@ -164,12 +164,12 @@ extension FayeClient {
         sendBayeuxDisconnectMessage()
     }
 
-    public func subscribeToChannel(_ channel: String) {
+    public func subscribe(to channel: String) {
 
-        subscribeToChannel(channel, usingBlock: nil)
+        subscribe(to: channel, usingBlock: nil)
     }
 
-    public func subscribeToChannel(_ channel: String, usingBlock subscriptionHandler: FayeClientSubscriptionHandler?) {
+    public func subscribe(to channel: String, usingBlock subscriptionHandler: FayeClientSubscriptionHandler?) {
 
         if let subscriptionHandler = subscriptionHandler {
             subscribedChannels[channel] = subscriptionHandler
@@ -182,7 +182,7 @@ extension FayeClient {
         }
     }
 
-    public func unsubscribeFromChannel(_ channel: String) {
+    public func unsubscribe(from channel: String) {
 
         subscribedChannels.removeValue(forKey: channel)
         pendingChannelSubscriptionSet.remove(channel)
