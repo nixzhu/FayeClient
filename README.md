@@ -6,10 +6,14 @@
 
 FayeClient is a Faye Client.
 
+## Requirement
+
+Swift 3
+
 ## Installation
 
 ```ruby
-pod 'FayeClient', '~> 0.9.0'
+pod 'FayeClient', '~> 1.0.0'
 ```
 
 ## Contact
